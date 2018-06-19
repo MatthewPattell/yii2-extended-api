@@ -1,6 +1,13 @@
 # yii2-extended-api
 Package extends the capabilities of standard classes Yii2 API
 
+[![Latest Stable Version](https://poser.pugx.org/matthew-p/yii2-extended-api/v/stable?style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
+[![Scrutinizer](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api/badges/quality-score.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api)
+[![Code Intelligence](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api/badges/code-intelligence.svg?b=master&style=flat-square)](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api)
+[![Software License](https://poser.pugx.org/matthew-p/yii2-extended-api/license?style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
+[![composer.lock](https://poser.pugx.org/matthew-p/yii2-extended-api/composerlock?format=flat-square&style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
+
+
 Installation
 ------------
 

@@ -31,11 +31,18 @@
     "matthew-p/yii2-services": "^1.2"
   },
   "require-dev": {
-    "codeception/codeception": "2.4.0"
+    "codeception/codeception": "2.4.0",
+    "yiisoft/yii2-coding-standards": "*",
+    "php-coveralls/php-coveralls": "^2.1"
   },
   "autoload": {
     "psr-4": {
       "MP\\ExtendedApi\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "MP\\ExtendedApi\\tests\\": "tests/"
     }
   }
 }

@@ -16,3 +16,7 @@ modules:
     config:
         Yii2:
             configFile: 'tests/_config/app.php'
+coverage:
+    enabled: true
+    include:
+        - src/*
