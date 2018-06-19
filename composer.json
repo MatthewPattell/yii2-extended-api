@@ -1,23 +1,41 @@
 {
   "name": "matthew-p/yii2-extended-api",
   "description": "Extension extends the capabilities of standard classes Yii2 API",
+  "homepage": "https://github.com/MatthewPattell/yii2-extended-api",
   "type": "yii2-extension",
-  "keywords": ["yii2","extension","api","controller","dataprovider","actions"],
+  "keywords": [
+    "yii2",
+    "extension",
+    "api",
+    "controller",
+    "dataprovider",
+    "actions"
+  ],
   "license": "MIT",
   "authors": [
     {
       "name": "Matthew Patell",
-      "email": "lukomi@mail.ru"
+      "email": "lukomi@mail.ru",
+      "role": "Developer"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://asset-packagist.org"
     }
   ],
   "require": {
     "php": ">=7.1.0",
-    "yiisoft/yii2": "~2.0.15",
+    "yiisoft/yii2": "^2.0.15",
     "matthew-p/yii2-services": "^1.2"
+  },
+  "require-dev": {
+    "codeception/codeception": "2.4.0"
   },
   "autoload": {
     "psr-4": {
-      "MP\\ExtendedApi\\": ""
+      "MP\\ExtendedApi\\": "src/"
     }
   }
 }
