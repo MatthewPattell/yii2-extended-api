@@ -52,6 +52,8 @@ before_script:
       CODECEPTION_FLAGS="--coverage-xml"
     fi
 
+  - vendor/bin/codecept build
+
 script:
   # PHP tests
   - vendor/bin/codecept --verbose run $CODECEPTION_FLAGS
