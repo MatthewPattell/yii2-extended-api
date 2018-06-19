@@ -15,7 +15,7 @@ php composer.phar require --prefer-dist matthew-p/yii2-extended-api "*"
 or add
 
 ```
-"matthew-p/yii2-extended-api": "*"
+"matthew-p/yii2-extended-api": "@dev"
 ```
 
 to the require section of your `composer.json` file.
