@@ -2,11 +2,12 @@
 Package extends the capabilities of standard classes Yii2 API
 
 [![Latest Stable Version](https://poser.pugx.org/matthew-p/yii2-extended-api/v/stable?style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
+[![node (scoped with tag)](https://travis-ci.org/MatthewPattell/yii2-extended-api.svg?branch=master&style=flat-square)](https://travis-ci.org/MatthewPattell/yii2-extended-api)
+[![Coverage Status](https://coveralls.io/repos/github/MatthewPattell/yii2-extended-api/badge.svg?branch=master&style=flat-square)](https://coveralls.io/github/MatthewPattell/yii2-extended-api?branch=master)
 [![Scrutinizer](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api/badges/quality-score.png?b=master&style=flat-square)](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api)
 [![Code Intelligence](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api/badges/code-intelligence.svg?b=master&style=flat-square)](https://scrutinizer-ci.com/g/MatthewPattell/yii2-extended-api)
 [![Software License](https://poser.pugx.org/matthew-p/yii2-extended-api/license?style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
 [![composer.lock](https://poser.pugx.org/matthew-p/yii2-extended-api/composerlock?format=flat-square&style=flat-square)](https://packagist.org/packages/matthew-p/yii2-extended-api)
-
 
 Installation
 ------------
