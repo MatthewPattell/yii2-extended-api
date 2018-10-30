@@ -13,6 +13,7 @@ use yii\db\ActiveRecordInterface;
 use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use MP\Services\ImplementServices;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Class    EActiveController
@@ -48,6 +49,16 @@ class EActiveController extends ActiveController
      * @var array
      */
     public $externalActions = [];
+
+    /**
+     * Check action access
+     *
+     * 'index'  => 'rule',
+     * 'update' => 'permission',
+     *
+     * @var array
+     */
+    public $checkAccessRules = [];
 
     /**
      * @inheritdoc
@@ -86,7 +97,7 @@ class EActiveController extends ActiveController
      *
      * @throws NotFoundHttpException
      */
-    public function filterError()
+    public function filterError(): void
     {
         throw new NotFoundHttpException(Yii::t('app', 'Nothing found'), self::FILTER_ERROR_CODE);
     }
@@ -108,5 +119,29 @@ class EActiveController extends ActiveController
         }
 
         return parent::afterAction($action, $result);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function checkAccess($action, $model = null, $params = [])
+    {
+        if ($this->checkAccessRules[$action] ?? null) {
+            $allow = Yii::$app->user->can($this->checkAccessRules[$action], ['model' => $model, 'params' => $params]);
+
+            if (!$allow) {
+                $this->forbidden();
+            }
+        }
+    }
+
+    /**
+     * Throw forbidden error
+     *
+     * @throws ForbiddenHttpException
+     */
+    protected function forbidden(): void
+    {
+        throw new ForbiddenHttpException(Yii::t('app', 'You are not allowed to perform this action.'));
     }
 }
