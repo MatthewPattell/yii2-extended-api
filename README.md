@@ -181,5 +181,37 @@ Features:
      $model = $action->getModel();
  }
  ```
+ - Custom query condition _index_ and _delete-all_ actions
+ ```
+ use MP\ExtendedApi\EActiveController;
+ 
+ class ProductsController extends EActiveController
+ {
+     public $actionsParams = [
+        'index' => [
+            'addQuery' => [self::class, 'customCondition'],
+        ],
+     ];
+     
+     public static function customCondition($query)
+     {
+         ...
+     }
+ ...
+ ```
+  - Filter by user for _index_ and _delete-all_ actions
+  ```
+  use MP\ExtendedApi\EActiveController;
+  
+  class ProductsController extends EActiveController
+  {
+      public $actionsParams = [
+         'index' => [
+             'filterUser' => 'user_id', // table column name
+         ],
+      ];
+     
+  ...
+  ```
  
 That's all. Check it.
