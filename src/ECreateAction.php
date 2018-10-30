@@ -7,7 +7,7 @@
 
 namespace MP\ExtendedApi;
 
-use yii\rest\UpdateAction;
+use yii\rest\CreateAction;
 
 /**
  * Class    ECreateAction
