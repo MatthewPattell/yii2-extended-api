@@ -28,6 +28,20 @@ class EDeleteAllAction extends IndexAction
     public $filterAttribute = 'filter';
 
     /**
+     * Add custom query condition
+     *
+     * @var null|\Closure
+     */
+    public $addQuery = null;
+
+    /**
+     * Column name
+     *
+     * @var null|string
+     */
+    public $filterUser = null;
+
+    /**
      * @var array
      */
     private $_deletedModels = [];
@@ -64,6 +78,14 @@ class EDeleteAllAction extends IndexAction
             /** @var ActiveDataProvider $dataProvider */
             $dataProvider = call_user_func([$action->dataFilter->searchModel, 'search'], []);
             $dataProvider->query->andWhere($filter);
+
+            if ($this->addQuery) {
+                call_user_func($this->addQuery, $dataProvider->query);
+            }
+
+            if ($this->filterUser) {
+                $dataProvider->query->andWhere([$this->filterUser => Yii::$app->user->getId()]);
+            }
 
             return $dataProvider;
         };
