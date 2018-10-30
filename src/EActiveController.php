@@ -14,6 +14,7 @@ use yii\rest\ActiveController;
 use yii\web\NotFoundHttpException;
 use MP\Services\ImplementServices;
 use yii\web\ForbiddenHttpException;
+use yii\helpers\ArrayHelper;
 
 /**
  * Class    EActiveController
@@ -55,21 +56,41 @@ class EActiveController extends ActiveController
      *
      * 'index'  => 'rule',
      * 'update' => 'permission',
+     *  and etc...
      *
      * @var array
      */
     public $checkAccessRules = [];
 
     /**
+     * @var array
+     */
+    public $actionsParams = [];
+
+    /**
      * @inheritdoc
      */
     public function actions(): array
     {
-        $actions = parent::actions();
+        $actions = ArrayHelper::merge(parent::actions(), [
+            'index'  => [
+                'class' => EIndexAction::class,
+            ],
+            'create' => [
+                'class' => ECreateAction::class,
+            ],
+            'view'   => [
+                'class' => EViewAction::class,
+            ],
+            'update' => [
+                'class' => EUpdateAction::class,
+            ],
+            'delete' => [
+                'class' => EDeleteAction::class,
+            ],
+        ]);
 
-        $actions['index']['class']  = EIndexAction::class;
-        $actions['delete']['class'] = EDeleteAction::class;
-        $actions['view']['class']   = EViewAction::class;
+        $actions = ArrayHelper::merge($actions, $this->actionsParams);
 
         if (!empty($this->searchClass)) {
             $actions['index']['dataFilter'] = [
