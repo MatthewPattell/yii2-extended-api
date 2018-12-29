@@ -84,7 +84,11 @@ class EDeleteAllAction extends IndexAction
             }
 
             if ($this->filterUser) {
-                $dataProvider->query->andWhere([$this->filterUser => Yii::$app->user->getId()]);
+                $filterUserValue = is_callable($this->filterUser) ? call_user_func($this->filterUser) : $this->filterUser;
+
+                if ($filterUserValue !== null) {
+                    $dataProvider->query->andWhere([$this->filterUser => $filterUserValue]);
+                }
             }
 
             return $dataProvider;
