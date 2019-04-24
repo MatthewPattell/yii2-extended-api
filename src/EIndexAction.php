@@ -28,6 +28,11 @@ class EIndexAction extends IndexAction
     public $filterAttribute = 'filter';
 
     /**
+     * @var string
+     */
+    public $extraFilter = 'extraFilter';
+
+    /**
      * Add custom query condition
      *
      * @var null|\Closure
@@ -42,23 +47,42 @@ class EIndexAction extends IndexAction
     public $filterUser = null;
 
     /**
+     * Get filter params
+     *
+     * @return array
+     */
+    public function getFilterParams(): array
+    {
+        $filterParams = Yii::$app->request->getQueryParams()[$this->filterAttribute] ?? [];
+
+        if (is_array($filterParams)) {
+            return $filterParams;
+        } else if (!empty($filterParams) && is_string($filterParams)) {
+            return json_decode($filterParams, true);
+        }
+
+        return [];
+    }
+
+    /**
      * @inheritdoc
      */
     protected function prepareDataProvider()
     {
-        $filter = Yii::$app->request->get($this->filterAttribute);
+        $filter      = Yii::$app->request->get($this->filterAttribute);
+        $extraFilter = Yii::$app->request->get($this->extraFilter);
 
         if (!empty($filter) && is_string($filter)) {
             $this->setFilterParams(json_decode($filter, true));
         }
 
-        $this->prepareDataProvider = function (EIndexAction $action, $filter) {
+        $this->prepareDataProvider = function (EIndexAction $action, $filter) use ($extraFilter) {
             /** @var ActiveDataProvider $dataProvider */
             $dataProvider = call_user_func([$action->dataFilter->searchModel, 'getDataProvider']);
             $dataProvider->query->andWhere($filter);
 
             if ($this->addQuery) {
-                call_user_func($this->addQuery, $dataProvider->query);
+                call_user_func($this->addQuery, $dataProvider->query, $extraFilter);
             }
 
             if ($this->filterUser) {
@@ -91,23 +115,5 @@ class EIndexAction extends IndexAction
         $queryParams[$this->filterAttribute] = $filterParams;
 
         Yii::$app->request->setQueryParams($queryParams);
-    }
-
-    /**
-     * Get filter params
-     *
-     * @return array
-     */
-    public function getFilterParams(): array
-    {
-        $filterParams = Yii::$app->request->getQueryParams()[$this->filterAttribute] ?? [];
-
-        if (is_array($filterParams)) {
-            return $filterParams;
-        } elseif (!empty($filterParams) && is_string($filterParams)) {
-            return json_decode($filterParams, true);
-        }
-
-        return [];
     }
 }
