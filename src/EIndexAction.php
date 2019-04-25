@@ -76,6 +76,10 @@ class EIndexAction extends IndexAction
             $this->setFilterParams(json_decode($filter, true));
         }
 
+        if (!empty($extraFilter) && is_string($extraFilter)) {
+            $extraFilter = json_decode($extraFilter, true);
+        }
+
         $this->prepareDataProvider = function (EIndexAction $action, $filter) use ($extraFilter) {
             /** @var ActiveDataProvider $dataProvider */
             $dataProvider = call_user_func([$action->dataFilter->searchModel, 'getDataProvider']);
