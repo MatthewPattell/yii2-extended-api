@@ -76,7 +76,7 @@ class EDeleteAllAction extends IndexAction
 
         $this->prepareDataProvider = function (EDeleteAllAction $action, $filter) {
             /** @var ActiveDataProvider $dataProvider */
-            $dataProvider = call_user_func([$action->dataFilter->searchModel, 'search'], []);
+            $dataProvider = call_user_func([$action->dataFilter->searchModel, 'getDataProvider']);
             $dataProvider->query->andWhere($filter);
 
             if ($this->addQuery) {
