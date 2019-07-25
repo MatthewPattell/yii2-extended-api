@@ -7,14 +7,14 @@
 
 namespace MP\ExtendedApi;
 
+use MP\Services\ImplementServices;
 use Yii;
 use yii\data\DataProviderInterface;
 use yii\db\ActiveRecordInterface;
-use yii\rest\ActiveController;
-use yii\web\NotFoundHttpException;
-use MP\Services\ImplementServices;
-use yii\web\ForbiddenHttpException;
 use yii\helpers\ArrayHelper;
+use yii\rest\ActiveController;
+use yii\web\ForbiddenHttpException;
+use yii\web\NotFoundHttpException;
 
 /**
  * Class    EActiveController
@@ -105,22 +105,16 @@ class EActiveController extends ActiveController
                     case 'delete-all':
                         $actions[$externalAction]          = $actions['index'];
                         $actions[$externalAction]['class'] = EDeleteAllAction::class;
+
+                        if (is_array($value)) {
+                            $actions[$externalAction] = ArrayHelper::merge($actions[$externalAction], $value);
+                        }
                     break;
                 }
             }
         }
 
         return $actions;
-    }
-
-    /**
-     * Throw error empty filtered result
-     *
-     * @throws NotFoundHttpException
-     */
-    public function filterError(): void
-    {
-        throw new NotFoundHttpException(Yii::t('app', 'Nothing found'), self::FILTER_ERROR_CODE);
     }
 
     /**
@@ -140,6 +134,16 @@ class EActiveController extends ActiveController
         }
 
         return parent::afterAction($action, $result);
+    }
+
+    /**
+     * Throw error empty filtered result
+     *
+     * @throws NotFoundHttpException
+     */
+    public function filterError(): void
+    {
+        throw new NotFoundHttpException(Yii::t('app', 'Nothing found'), self::FILTER_ERROR_CODE);
     }
 
     /**
