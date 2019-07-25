@@ -42,6 +42,13 @@ class EDeleteAllAction extends IndexAction
     public $filterUser = null;
 
     /**
+     * Delete all without condition
+     *
+     * @var bool
+     */
+    public $hardDelete = false;
+
+    /**
      * @var array
      */
     private $_deletedModels = [];
@@ -68,7 +75,7 @@ class EDeleteAllAction extends IndexAction
             $queryParams[$this->filterAttribute] = json_decode($filter, true);
         }
 
-        if (empty($queryParams[$this->filterAttribute]) || empty(array_filter($queryParams[$this->filterAttribute]))) {
+        if (!$this->hardDelete && (empty($queryParams[$this->filterAttribute]) || empty(array_filter($queryParams[$this->filterAttribute])))) {
             throw new NotFoundHttpException("Param '{$this->filterAttribute}' cannot be empty");
         }
 
@@ -94,21 +101,25 @@ class EDeleteAllAction extends IndexAction
             return $dataProvider;
         };
 
-        $dataProvider = parent::prepareDataProvider();
-        /** @var ActiveQuery $query */
-        $query = $dataProvider->query;
-        $query
-            ->limit(-1)
-            ->offset(-1)
-            ->orderBy([]);
+        if ($this->hardDelete) {
+            $this->modelClass::deleteAll();
+        } else {
+            $dataProvider = parent::prepareDataProvider();
+            /** @var ActiveQuery $query */
+            $query = $dataProvider->query;
+            $query
+                ->limit(-1)
+                ->offset(-1)
+                ->orderBy([]);
 
-        $countDeleted = 0;
+            $countDeleted = 0;
 
-        foreach ($query->each() as $model) {
-            /** @var $model ActiveRecord */
-            if ($model->delete()) {
-                $this->_deletedModels[] = $model;
-                $countDeleted++;
+            foreach ($query->each() as $model) {
+                /** @var $model ActiveRecord */
+                if ($model->delete()) {
+                    $this->_deletedModels[] = $model;
+                    $countDeleted++;
+                }
             }
         }
 
