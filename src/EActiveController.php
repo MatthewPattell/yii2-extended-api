@@ -105,10 +105,6 @@ class EActiveController extends ActiveController
                     case 'delete-all':
                         $actions[$externalAction]          = $actions['index'];
                         $actions[$externalAction]['class'] = EDeleteAllAction::class;
-
-                        if (is_array($value)) {
-                            $actions[$externalAction] = ArrayHelper::merge($actions[$externalAction], $value);
-                        }
                     break;
                 }
             }
