@@ -94,7 +94,7 @@ class EUpdateAllAction extends IndexAction
 
         Yii::$app->request->setQueryParams($queryParams);
 
-        $this->prepareDataProvider = function (EIndexAction $action, $filter) use ($extraFilter) {
+        $this->prepareDataProvider = function (EUpdateAllAction $action, $filter) use ($extraFilter) {
             /** @var ActiveDataProvider $dataProvider */
             $dataProvider = call_user_func([$action->dataFilter->searchModel, 'getDataProvider']);
             $dataProvider->query->andWhere($filter);
@@ -140,6 +140,6 @@ class EUpdateAllAction extends IndexAction
 
         Yii::$app->response->headers->set('X-Total-Updated', $countUpdated);
 
-        return;
+        return $dataProvider;
     }
 }
