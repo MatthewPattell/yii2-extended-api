@@ -106,6 +106,11 @@ class EActiveController extends ActiveController
                         $actions[$externalAction]          = $actions['index'];
                         $actions[$externalAction]['class'] = EDeleteAllAction::class;
                     break;
+
+                    case 'update-all':
+                        $actions[$externalAction]          = $actions['index'];
+                        $actions[$externalAction]['class'] = EUpdateAllAction::class;
+                    break;
                 }
             }
         }

@@ -153,6 +153,7 @@ class ExampleProductSearch extends ExampleProduct implements ModelSearchInterfac
 
 Features:
  - Delete all models action (support filtering, add headers)
+ - Update all models action (support filtering, add headers)
  - Filtering via custom data provider
  - Custom error if filter result empty
  - View action trigger
