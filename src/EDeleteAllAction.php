@@ -105,20 +105,23 @@ class EDeleteAllAction extends IndexAction
             $this->modelClass::deleteAll();
         } else {
             $dataProvider = parent::prepareDataProvider();
-            /** @var ActiveQuery $query */
-            $query = $dataProvider->query;
-            $query
-                ->limit(-1)
-                ->offset(-1)
-                ->orderBy([]);
 
-            $countDeleted = 0;
+            if ($dataProvider instanceof ActiveDataProvider) {
+                /** @var ActiveQuery $query */
+                $query = $dataProvider->query;
+                $query
+                    ->limit(-1)
+                    ->offset(-1)
+                    ->orderBy([]);
 
-            foreach ($query->each() as $model) {
-                /** @var $model ActiveRecord */
-                if ($model->delete()) {
-                    $this->_deletedModels[] = $model;
-                    $countDeleted++;
+                $countDeleted = 0;
+
+                foreach ($query->each() as $model) {
+                    /** @var $model ActiveRecord */
+                    if ($model->delete()) {
+                        $this->_deletedModels[] = $model;
+                        $countDeleted++;
+                    }
                 }
             }
         }

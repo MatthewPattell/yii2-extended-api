@@ -119,22 +119,24 @@ class EUpdateAllAction extends IndexAction
         };
 
         $dataProvider = parent::prepareDataProvider();
-        /** @var ActiveQuery $query */
-        $query = $dataProvider->query;
-        $query
-            ->limit(-1)
-            ->offset(-1)
-            ->orderBy([]);
-
         $countUpdated = 0;
 
-        foreach ($query->each() as $model) {
-            /** @var $model ActiveRecord */
-            $model->setAttributes($updatedAttributes);
+        if ($dataProvider instanceof ActiveDataProvider) {
+            /** @var ActiveQuery $query */
+            $query = $dataProvider->query;
+            $query
+                ->limit(-1)
+                ->offset(-1)
+                ->orderBy([]);
 
-            if ($model->save()) {
-                $this->_updatedModels[] = $model;
-                $countUpdated++;
+            foreach ($query->each() as $model) {
+                /** @var $model ActiveRecord */
+                $model->setAttributes($updatedAttributes);
+
+                if ($model->save()) {
+                    $this->_updatedModels[] = $model;
+                    $countUpdated++;
+                }
             }
         }
 
