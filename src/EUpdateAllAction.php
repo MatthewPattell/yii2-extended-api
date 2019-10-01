@@ -30,6 +30,11 @@ class EUpdateAllAction extends IndexAction
     /**
      * @var string
      */
+    public $extraFilter = 'extraFilter';
+
+    /**
+     * @var string
+     */
     public $updatedAttribute = 'updatedAttributes';
 
     /**
@@ -67,11 +72,16 @@ class EUpdateAllAction extends IndexAction
     protected function prepareDataProvider()
     {
         $filter            = Yii::$app->request->get($this->filterAttribute);
+        $extraFilter       = Yii::$app->request->get($this->extraFilter);
         $queryParams       = Yii::$app->request->getQueryParams();
         $updatedAttributes = [];
 
         if (!empty($filter)) {
             $queryParams[$this->filterAttribute] = json_decode($filter, true);
+        }
+
+        if (!empty($extraFilter) && is_string($extraFilter)) {
+            $extraFilter = json_decode($extraFilter, true);
         }
 
         if (!empty($queryParams[$this->updatedAttribute])) {
