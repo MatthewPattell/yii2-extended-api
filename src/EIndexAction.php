@@ -86,7 +86,7 @@ class EIndexAction extends IndexAction
             $dataProvider->query->andWhere($filter);
 
             if ($this->addQuery) {
-                call_user_func($this->addQuery, $dataProvider->query, $extraFilter, $action->dataFilter);
+                call_user_func($this->addQuery, $dataProvider->query, $extraFilter, $action->dataFilter, $dataProvider);
 
                 if ($action->dataFilter->hasErrors()) {
                     return $action->dataFilter;
