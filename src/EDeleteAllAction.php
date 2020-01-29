@@ -87,7 +87,7 @@ class EDeleteAllAction extends IndexAction
             $dataProvider->query->andWhere($filter);
 
             if ($this->addQuery) {
-                call_user_func($this->addQuery, $dataProvider->query);
+                call_user_func($this->addQuery, $dataProvider->query, null, $action->dataFilter, $dataProvider);
             }
 
             if ($this->filterUser) {
