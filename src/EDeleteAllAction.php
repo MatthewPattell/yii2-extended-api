@@ -37,10 +37,11 @@ class EDeleteAllAction extends IndexAction
 
     /**
      * Column name
+     * @see \Closure
      *
-     * @var null|string
+     * @var null|array
      */
-    public ?string $filterUser = null;
+    public ?array $filterUser = null;
 
     /**
      * Delete all without condition
@@ -92,7 +93,7 @@ class EDeleteAllAction extends IndexAction
             }
 
             if ($this->filterUser) {
-                $filterUserColumn = is_callable($this->filterUser) ? call_user_func($this->filterUser) : $this->filterUser;
+                $filterUserColumn = call_user_func($this->filterUser);
 
                 if ($filterUserColumn !== null) {
                     $dataProvider->query->andWhere([$filterUserColumn => Yii::$app->user->getId()]);
