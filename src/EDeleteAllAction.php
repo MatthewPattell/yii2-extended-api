@@ -29,10 +29,11 @@ class EDeleteAllAction extends IndexAction
 
     /**
      * Add custom query condition
+     * @see \Closure params
      *
-     * @var null|\Closure
+     * @var null|array
      */
-    public ?\Closure $addQuery = null;
+    public ?array $addQuery = null;
 
     /**
      * Column name
