@@ -25,33 +25,33 @@ class EDeleteAllAction extends IndexAction
     /**
      * @var string
      */
-    public $filterAttribute = 'filter';
+    public string $filterAttribute = 'filter';
 
     /**
      * Add custom query condition
      *
      * @var null|\Closure
      */
-    public $addQuery = null;
+    public ?\Closure $addQuery = null;
 
     /**
      * Column name
      *
      * @var null|string
      */
-    public $filterUser = null;
+    public ?string $filterUser = null;
 
     /**
      * Delete all without condition
      *
      * @var bool
      */
-    public $hardDelete = false;
+    public bool $hardDelete = false;
 
     /**
      * @var array
      */
-    private $_deletedModels = [];
+    private array $_deletedModels = [];
 
     /**
      * Get deleted models

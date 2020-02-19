@@ -23,16 +23,16 @@ use yii\web\ServerErrorHttpException;
 class EDeleteAction extends DeleteAction
 {
     /**
-     * @var ActiveRecord
+     * @var ActiveRecord|null
      */
-    private $_model;
+    private ?ActiveRecord $_model;
 
     /**
      * Get deleted model
      *
-     * @return ActiveRecord
+     * @return ActiveRecord|null
      */
-    public function getModel(): ActiveRecord
+    public function getModel(): ?ActiveRecord
     {
         return $this->_model;
     }

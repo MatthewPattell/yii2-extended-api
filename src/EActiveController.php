@@ -31,16 +31,16 @@ class EActiveController extends ActiveController
     /**
      * Search model class
      *
-     * @var ActiveRecordInterface
+     * @var ActiveRecordInterface|string
      */
-    public $searchClass;
+    public string $searchClass;
 
     /**
      * Return error if empty filtered result
      *
      * @var bool
      */
-    public $errorFilter = false;
+    public bool $errorFilter = false;
 
     /**
      * List external actions
@@ -49,7 +49,7 @@ class EActiveController extends ActiveController
      *
      * @var array
      */
-    public $externalActions = [];
+    public array $externalActions = [];
 
     /**
      * Check action access
@@ -60,12 +60,12 @@ class EActiveController extends ActiveController
      *
      * @var array
      */
-    public $checkAccessRules = [];
+    public array $checkAccessRules = [];
 
     /**
      * @var array
      */
-    public $actionsParams = [];
+    public array $actionsParams = [];
 
     /**
      * @inheritdoc

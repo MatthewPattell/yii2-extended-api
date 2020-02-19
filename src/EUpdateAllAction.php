@@ -25,36 +25,36 @@ class EUpdateAllAction extends IndexAction
     /**
      * @var string
      */
-    public $filterAttribute = 'filter';
+    public string $filterAttribute = 'filter';
 
     /**
      * @var string
      */
-    public $extraFilter = 'extraFilter';
+    public string $extraFilter = 'extraFilter';
 
     /**
      * @var string
      */
-    public $updatedAttribute = 'updatedAttributes';
+    public string $updatedAttribute = 'updatedAttributes';
 
     /**
      * Add custom query condition
      *
      * @var null|\Closure
      */
-    public $addQuery = null;
+    public ?\Closure $addQuery = null;
 
     /**
      * Column name
      *
      * @var null|string
      */
-    public $filterUser = null;
+    public ?string $filterUser = null;
 
     /**
      * @var array
      */
-    private $_updatedModels = [];
+    private array $_updatedModels = [];
 
     /**
      * Get deleted models

@@ -25,26 +25,26 @@ class EIndexAction extends IndexAction
     /**
      * @var string
      */
-    public $filterAttribute = 'filter';
+    public string $filterAttribute = 'filter';
 
     /**
      * @var string
      */
-    public $extraFilter = 'extraFilter';
+    public string $extraFilter = 'extraFilter';
 
     /**
      * Add custom query condition
      *
      * @var null|\Closure
      */
-    public $addQuery = null;
+    public ?\Closure $addQuery = null;
 
     /**
      * Column name
      *
      * @var null|string
      */
-    public $filterUser = null;
+    public ?string $filterUser = null;
 
     /**
      * Get filter params
